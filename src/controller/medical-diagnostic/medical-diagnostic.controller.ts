@@ -8,7 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { MedicalDiagnosticService } from 'src/services/medical-diagnostic.service';
+import { MedicalDiagnosticService } from '../../services/medical-diagnostic.service';
 
 @Controller('/api/v1/medical-diagnostic')
 export class MedicalDiagnosticController {

@@ -1,6 +1,6 @@
 import { Injectable, Scope } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { MedicalHistory } from 'src/entities/medical-history.entity';
+import { MedicalHistory } from '../entities/medical-history.entity';
 import { Repository } from 'typeorm';
 
 @Injectable({
