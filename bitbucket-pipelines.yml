@@ -1,0 +1,15 @@
+image: node:16
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Install Dependencies
+          caches:
+            - node
+          script:
+            - npm install
+      - step:
+          name: Build and Test
+          script:
+            - npm run build
+            - npm test
