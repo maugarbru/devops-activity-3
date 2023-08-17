@@ -13,9 +13,9 @@ pipelines:
             - node
           script:
             - npm install
-            - npm install -g @nestjs/cli
       - step:
           name: Build and Test
           script:
+            - npm install
             - npm run build
             - npm test
