@@ -8,14 +8,9 @@ pipelines:
             - echo "Limpiando la caché de dependencias..."
             - npm cache clean --force
       - step:
-          name: Install Dependencies
-          caches:
-            - node
-          script:
-            - npm install
-      - step:
           name: Build and Test
           script:
             - npm install
+            - npm install -g @nestjs/cli
             - npm run build
             - npm test
