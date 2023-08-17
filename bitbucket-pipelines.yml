@@ -3,12 +3,17 @@ pipelines:
   branches:
     master:
       - step:
+          name: Clean Cache
+          script:
+            - echo "Limpiando la caché de dependencias..."
+            - npm cache clean --force
+      - step:
           name: Install Dependencies
           caches:
             - node
           script:
             - npm install
-            - npm install @nestjs/cli
+            - npm install -g @nestjs/cli
       - step:
           name: Build and Test
           script:
