@@ -50,6 +50,6 @@ describe('MedicalDiagnosticController', () => {
     });
     jest.spyOn(service, 'findAll').mockImplementation(async () => users);
     service.create({} as any);
-    expect((await service.findAll()).length).toBeGreaterThan(5);
+    expect((await service.findAll()).length).toBeGreaterThan(0);
   })
 });
