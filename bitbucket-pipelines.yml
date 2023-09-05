@@ -29,6 +29,6 @@ pipelines:
               variables:
                 SSH_USER: $SSH_USER
                 SERVER: $SERVER
-                COMMAND: 'docker pull $DOCKER_USERNAME/$DOCKER_IMAGE_NAME && docker run -d -p 3000:3000 $DOCKER_USERNAME/$DOCKER_IMAGE_NAME'
+                COMMAND: 'docker pull $DOCKER_USERNAME/$DOCKER_IMAGE_NAME && docker run -p 3000:3000 $DOCKER_USERNAME/$DOCKER_IMAGE_NAME -d'
                 MODE: 'script'
                 DEBUG: 'true'
