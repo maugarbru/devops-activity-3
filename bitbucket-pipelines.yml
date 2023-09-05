@@ -16,11 +16,12 @@ pipelines:
             - npm test
       - step: 
           name: Build Image     
-          image: docker:latest 
           script:
             - echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
             - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE_NAME .
             - docker push $DOCKER_USERNAME/$DOCKER_IMAGE_NAME
+          services:
+            - docker
       - step: 
           name: deploy
           script:
