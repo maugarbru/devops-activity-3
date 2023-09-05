@@ -14,3 +14,20 @@ pipelines:
             - npm install -g @nestjs/cli
             - npm run build
             - npm test
+      - step: 
+          name: Build Image     
+          image: docker:latest 
+          script:
+            - echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
+            - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE_NAME .
+            - docker push $DOCKER_USERNAME/$DOCKER_IMAGE_NAME
+      - step: 
+          name: deploy
+          script:
+            - pipe: atlassian/ssh-run:0.2.2
+              variables:
+                SSH_USER: $SSH_USER
+                SERVER: $SERVER
+                COMMAND: 'docker pull $DOCKER_USERNAME/$DOCKER_IMAGE_NAME && docker run -d -p 3000:3000 $DOCKER_USERNAME/$DOCKER_IMAGE_NAME'
+                MODE: 'script'
+                DEBUG: 'true'
