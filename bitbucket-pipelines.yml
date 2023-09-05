@@ -29,6 +29,6 @@ pipelines:
               variables:
                 SSH_USER: $SSH_USER
                 SERVER: $SERVER
-                COMMAND: 'docker pull $DOCKER_USERNAME/$DOCKER_IMAGE_NAME && docker run -p 3000:3000 $DOCKER_USERNAME/$DOCKER_IMAGE_NAME -d'
+                COMMAND: 'docker run -p 3000:3000 sebasvargas98/nest-api -d'
                 MODE: 'script'
                 DEBUG: 'true'
