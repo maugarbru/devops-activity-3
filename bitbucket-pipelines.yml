@@ -16,6 +16,7 @@ pipelines:
       - step: 
           name: Build Image     
           script:
+            - npm install
             - npm run build
             - echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
             - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE_NAME .
