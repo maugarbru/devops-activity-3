@@ -1,18 +1,13 @@
-# Utiliza una imagen base de Node.js
-FROM node:16
+# Base image
+FROM node:18
 
-# Directorio de trabajo en el contenedor
-WORKDIR /usr/src/app
+# Create app directory
+WORKDIR /app
 
-# Copia los archivos de la aplicación al contenedor
+COPY dist/. .
 COPY package*.json ./
-COPY . .
 
-# Instala las dependencias
 RUN npm install
 
-# Expone el puerto en el que se ejecuta la aplicación
-EXPOSE 3000
-
-# Comando para iniciar la aplicación
-CMD ["npm", "run", "start"]
+# Start the server using the production build
+CMD [ "node", "main.js" ]
