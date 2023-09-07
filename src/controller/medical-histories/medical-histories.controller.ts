@@ -6,7 +6,7 @@ export class MedicalHistoriesController {
   constructor(private medicalHistoriesService: MedicalHistoriesService) {}
   @Get()
   getHello() {
-    return {data: this.medicalHistoriesService.findAll()};
+    return this.medicalHistoriesService.findAll();
   }
   @Post()
   create(@Body() payload: any) {

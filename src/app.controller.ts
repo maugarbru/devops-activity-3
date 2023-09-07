@@ -11,7 +11,7 @@ export class AppController {
 
   @Get()
   getHello() {
-    return this.userService.findAll();
+    return {data: this.userService.findAll()};
   }
   @Post()
   createUser(@Body() payload: any) {
