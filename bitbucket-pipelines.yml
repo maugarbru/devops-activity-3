@@ -30,5 +30,5 @@ pipelines:
               variables:
                 SSH_USER: $SSH_USER
                 SERVER: $SERVER
-                COMMAND: 'docker run -p 3000:3000 --name nest-api sebasvargas98/nest-api'
+                COMMAND: 'docker stop nest-api && docker rm nest-api && docker pull sebasvargas98/nest-api && docker run -p 3000:3000 --name nest-api sebasvargas98/nest-api'
                 DEBUG: 'true'
