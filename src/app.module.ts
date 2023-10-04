@@ -19,21 +19,20 @@ import { MedicalDiagnosticService } from './services/medical-diagnostic.service'
       isGlobal: true,
     }),
     TypeOrmModule.forFeature([User, MedicalHistory, MedicalDiagnostic]),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: '52.7.185.136',
-        port: 5432,
-        username:  'rem0ti_us3r',
-        password: 'postgrespw/*',
-        database: 'nest_api',
-        autoLoadEntities: true,
-        synchronize: true,
-        
-      }),
-      inject: [ConfigService],
-    }),
+    TypeOrmModule.forRoot({
+      type: 'mssql',
+      host: 'sqltestdevops.database.windows.net',
+      port: 1433,
+      username: 'sqladmin',
+      password: 'cgEN5eXTp5FxSP',
+      database: 'SampleDB',
+      entities: [User, MedicalHistory, MedicalDiagnostic],
+      autoLoadEntities: true,
+      extra: {
+        encrypt: true,
+      },
+      synchronize: true, //use this with development enviroment
+    })
   ],
   controllers: [
     AppController,

@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { MedicalHistory } from './medical-history.entity';
 
-@Entity({ name: 'medical_diagnostics', schema: 'public' })
+@Entity()
 export class MedicalDiagnostic {
   @PrimaryGeneratedColumn()
   id: number;

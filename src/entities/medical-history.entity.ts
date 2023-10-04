@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { User } from './user.entity';
 
-@Entity({ name: 'medical_histories', schema: 'public' })
+@Entity()
 export class MedicalHistory {
   @PrimaryGeneratedColumn()
   id: number;
