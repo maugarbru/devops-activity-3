@@ -1,0 +1,57 @@
+name: Main CI/CD Workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  build:
+    name: 'CI/CD'
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ steps.extract_branch.outputs.branch }}
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Unit Tests
+        run: npm run test
+
+      - name: Run Build
+        run: npm run build
+    
+      - name: Build Docker Image
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ vars.DOCKER_USERNAME }} --password-stdin
+          docker build -t ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_IMAGE_NAME }} .
+          docker push ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_IMAGE_NAME }}
+
+      - name: Deploy
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSL_HOST }}
+          username: ${{ secrets.SSL_USERNAME }}
+          password: ${{ secrets.SSL_PASSWORD }}
+          port: ${{ secrets.SSL_PORT }}
+          script: |
+            docker stop ${{ vars.DOCKER_IMAGE_NAME }}
+            docker rm ${{ vars.DOCKER_IMAGE_NAME }}
+            docker pull ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_IMAGE_NAME }}
+            docker run -p 4000:3000 --name ${{ vars.DOCKER_IMAGE_NAME }} ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_IMAGE_NAME }}
