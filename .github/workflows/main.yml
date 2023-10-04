@@ -51,8 +51,7 @@ jobs:
           password: ${{ secrets.SSL_PASSWORD }}
           port: ${{ secrets.SSL_PORT }}
           script: |
-            sudo su
-            docker stop ${{ vars.DOCKER_IMAGE_NAME }}
-            docker rm ${{ vars.DOCKER_IMAGE_NAME }}
-            docker pull ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_IMAGE_NAME }}
-            docker run -p 4000:3000 --name ${{ vars.DOCKER_IMAGE_NAME }} ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_IMAGE_NAME }}
+            sudo docker stop ${{ vars.DOCKER_IMAGE_NAME }}
+            sudo docker rm ${{ vars.DOCKER_IMAGE_NAME }}
+            sudo docker pull ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_IMAGE_NAME }}
+            sudo docker run -p 4000:3000 --name ${{ vars.DOCKER_IMAGE_NAME }} ${{ vars.DOCKER_USERNAME }}/${{ vars.DOCKER_IMAGE_NAME }}
