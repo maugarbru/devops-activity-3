@@ -15,7 +15,7 @@ import { MedicalDiagnosticService } from './services/medical-diagnostic.service'
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.development.env',
+      envFilePath: '.azure.env',
       isGlobal: true,
     }),
     TypeOrmModule.forFeature([User, MedicalHistory, MedicalDiagnostic]),
