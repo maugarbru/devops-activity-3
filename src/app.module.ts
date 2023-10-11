@@ -21,11 +21,11 @@ import { MedicalDiagnosticService } from './services/medical-diagnostic.service'
     TypeOrmModule.forFeature([User, MedicalHistory, MedicalDiagnostic]),
     TypeOrmModule.forRoot({
       type: 'mssql',
-      host: 'sqltestdevops.database.windows.net',
+      host: process.env.AZURE_SQL_HOST || '',
       port: 1433,
-      username: 'sqladmin',
-      password: 'cgEN5eXTp5FxSP',
-      database: 'SampleDB',
+      username: process.env.AZURE_SQL_USER || '',
+      password: process.env.AZURE_SQL_PASSWORD || '',
+      database: process.env.AZURE_SQL_DB || '',
       entities: [User, MedicalHistory, MedicalDiagnostic],
       autoLoadEntities: true,
       extra: {
