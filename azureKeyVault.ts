@@ -19,7 +19,7 @@ const getAzureSecrets = async () => {
     (await client.getSecret("sqlpassword")).value,
   ]);
   
-  const envFile = fs.createWriteStream(".development.env", {
+  const envFile = fs.createWriteStream(".azure.env", {
     flags: "w",
   });
 
