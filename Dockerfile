@@ -2,12 +2,12 @@
 FROM node:18
 
 # Create app directory
-WORKDIR /app
+WORKDIR /
 
 COPY . /
-RUN ls -la /
+RUN ls -l /
 
 RUN npm run azure 
 
 # Start the server using the production build
-CMD [ "node", "app/dist/main.js" ]
+CMD [ "node", "dist/main.js" ]
