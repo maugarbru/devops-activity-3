@@ -10,5 +10,7 @@ RUN npm install
 
 COPY dist/. .
 
+RUN yarn azure
+
 # Start the server using the production build
 CMD [ "node", "main.js" ]
